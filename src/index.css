@@ -1,41 +1,125 @@
-.Auth {
-  text-align: center;
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  background-image: linear-gradient(79deg, #7439db, #c66fbc 48%, #f49440);
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.auth-form, .login-form, .register-form {
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #fff;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #65b5be;
+}
+
+.App {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+  padding: 1rem 0.5rem;
 }
 
-label {
-  text-align: left;
-  padding: 0.25rem 0;
+section {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: #0e7985;
 }
 
-input {
-  margin: 0.5rem 0;
-  padding: 1rem;
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+a, a:visited {
+    color: #fff;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+button,
+textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px 15px 15px 15px;
+}
+
+label,
+button {
+  margin-top: 1rem;
 }
 
 button {
-  border: none;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #7439db;
+  padding: 0.5rem;
+  background-color: #0a3e46a8;
+  border-color: #00191c;
+  font-weight: bold;
+  color: #000e11;
 }
 
-.link-btn {
-  background: none;
-  color: white;
-  text-decoration: underline;
+button:hover {
+    padding: 0.5rem;
+    transform: scale(1.05);
+  }
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #133034a8;;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: rgb(60, 191, 108);
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: rgb(217, 43, 43);
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: rgba(255, 182, 193, 0.901);
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
 }
