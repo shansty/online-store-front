@@ -9,7 +9,7 @@
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 22px;
-    color: #fff;
+    color: #000000;
 }
 
 body {
@@ -23,7 +23,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
-  padding: 1rem 0.5rem;
+  padding: 3rem 0.5rem;
 }
 
 section {
@@ -52,6 +52,7 @@ a, a:visited {
 input[type="text"],
 input[type="password"],
 input[type="email"],
+input[type="checkbox"],
 button,
 textarea {
   font-family: 'Nunito', sans-serif;
@@ -124,7 +125,7 @@ button:hover {
     display: inline-block;
 }
 
-nav {
+nav.burger_navigation {
     height: 50px;
     width: 100%;
     background-color: #7ab5bb;
@@ -219,4 +220,22 @@ ul.burger_links li {
     display: flex;
     margin: 5px;
     list-style: none;
+}
+
+.profile_form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: baseline;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+.profile_form > label {
+    margin-right: 10px;
+    padding-right: .5em;
+}
+form.profile_form input {
+    flex: 1;
 }

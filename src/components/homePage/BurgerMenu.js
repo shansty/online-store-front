@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom"
-
-const Menu = ({items, active, setActive}) => {
+const BurgerMenu = ({items, active, setActive}) => {
     return(
         <>
             <div className={active ? "burger-menu active" : "burger-menu"} onClick={() => setActive(false)}>
@@ -18,4 +16,4 @@ const Menu = ({items, active, setActive}) => {
     )
 }
 
-export default Menu;
+export default BurgerMenu;

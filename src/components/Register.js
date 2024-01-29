@@ -66,7 +66,7 @@ const Register = () => {
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                { fullName: user, email: email, password: pwd }
+                { userName: user, email: email, password: pwd }
             );
             console.log(response.data);
             console.log(JSON.stringify(response))
