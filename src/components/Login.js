@@ -31,7 +31,9 @@ const Login = () => {
                 {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}});
 
             console.log(JSON.stringify(response?.data));
-           // const accessToken = response?.data?.accessToken;
+            const token = response?.data?.token;
+            localStorage.setItem("token", token);
+
            // setAuth({ user, pwd, accessToken });
             setEmail('');
             setPwd('');
@@ -85,7 +87,7 @@ const Login = () => {
                             value={pwd}
                             requred
                         />
-                        <button>Sign In</button>
+                        <button className="auth_button">Sign In</button>
                     </form>
                     <p>
                         Need an Account? <br />

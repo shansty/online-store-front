@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const BurgerMenu = ({items, active, setActive}) => {
     return(
         <>
@@ -6,7 +8,8 @@ const BurgerMenu = ({items, active, setActive}) => {
                     <ul className="burger_links">
                         {items.map(item =>
                             <li>
-                                <a href={item.href}>{item.value}</a>
+                                  {/* <a href={item.href}>{item.value}</a> */}
+                                  <Link to={item.href}>{item.value}</Link>
                             </li>
                         )}
                     </ul>

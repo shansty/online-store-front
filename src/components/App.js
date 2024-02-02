@@ -19,8 +19,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
         </Routes>
-      </BrowserRouter>
-      <nav className="burger_navigation">
+            <nav className="burger_navigation">
                 <div className="burger-btn" onClick={() => setBurgerMenuActive(!burgerMenuActive)}>
                     <span/>
                 </div>
@@ -30,6 +29,7 @@ function App() {
             setActive={setBurgerMenuActive}
             items={items}
             />
+      </BrowserRouter>
     </main>
   );
 }
