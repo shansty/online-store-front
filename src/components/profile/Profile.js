@@ -5,6 +5,7 @@ import getIDFromToken from "../../utils";
 const Profile = () => {
     let id = getIDFromToken();
     const PROFILE_URL = `/profile/${id}`;
+    const token = localStorage.getItem("token");
 
     const[user, setUser] = useState({});
     const[userName, setUserName] = useState("Пока что");
@@ -15,27 +16,16 @@ const Profile = () => {
     const [success, setSuccess] = useState(false);
     const [errMsg, setErrMsq] = useState("");
 
-    useEffect((e) => {
-        setUser({
-            userName: userName,
-            email: email,
-            phoneNumber: phoneNumber,
-            shopOwner: shopOwner
-        })
-    }, [userName, email, phoneNumber, shopOwner]);
-
-    useEffect(() => {
-        getUser()
-    }, []);
-
     const getUser = async (e) => {
         try {
-            const response = await axios.get(PROFILE_URL, localStorage.getItem("token"),  
-                {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}});
+            const response = await axios.get(PROFILE_URL,   
+                {headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json',
+                    'Authorization':   `Bearer ${token}`}});
             const userData = response?.data;
             setUser({userData})
-            console.log({userData
-            })
+            console.log({userData})
         } catch (err) {
             if(!err?.response) {
                 setErrMsq('No Server Response')
@@ -54,7 +44,10 @@ const Profile = () => {
         setAllowEdit(false);
         try {
             await axios.patch(PROFILE_URL, {user},  
-                {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}});
+                {headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json',
+                    'Authorization':   `Bearer ${token}`}});
             setSuccess(true);
         } catch (err) {
             if(!err?.response) {
@@ -64,6 +57,20 @@ const Profile = () => {
             }
         }
     }
+
+    useEffect((e) => {
+        setUser({
+            userName: userName,
+            email: email,
+            phoneNumber: phoneNumber,
+            shopOwner: shopOwner
+        })
+    }, [userName, email, phoneNumber, shopOwner]);
+
+    useEffect(() => {
+        getUser()
+    }, []);
+
     return(
         <>
             <h2>Ваш профиль</h2>

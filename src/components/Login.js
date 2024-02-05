@@ -27,7 +27,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(LOGIN_URL, {email:email, password:pwd},  
+            const response = await axios.post(LOGIN_URL, {email, password:pwd},  
                 {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}});
 
             console.log(JSON.stringify(response?.data));

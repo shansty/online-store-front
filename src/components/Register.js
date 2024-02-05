@@ -66,7 +66,7 @@ const Register = () => {
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                { userName: user, email: email, password: pwd }
+                { userName: user, email, password: pwd }
             );
             console.log(response.data);
             console.log(JSON.stringify(response))
@@ -218,7 +218,7 @@ const Register = () => {
                         Must match the first password input field.
                     </p>
 
-                    <button className="auth_button" type="submit" disabled={!validEmail || !validName || !validPwd || !validMatch ? true : false}> Sign Up </button>
+                    <button className="auth_button" type="submit" disabled={!validEmail || !validName || !validPwd || !validMatch}> Sign Up </button>
                 </form>
             <p>Already registered? <br />
                     <Link to="/login">
