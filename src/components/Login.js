@@ -73,7 +73,7 @@ const Login = () => {
                             type="text" 
                             id="email" 
                             ref={userRef}
-                            autoComplete="off"
+                            autoComplete="on"
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             requred

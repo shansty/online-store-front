@@ -7,7 +7,7 @@ const BurgerMenu = ({items, active, setActive}) => {
                 <div className="menu_content" onClick={e => e.stopPropagation()}>
                     <ul className="burger_links">
                         {items.map(item =>
-                            <li>
+                            <li key={item.id}>
                                   {/* <a href={item.href}>{item.value}</a> */}
                                   <Link to={item.href}>{item.value}</Link>
                             </li>

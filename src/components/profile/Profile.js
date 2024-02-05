@@ -8,9 +8,9 @@ const Profile = () => {
     const token = localStorage.getItem("token");
 
     const[user, setUser] = useState({});
-    const[userName, setUserName] = useState("Пока что");
-    const[email, setEmail] = useState("Какие-то");
-    const[phoneNumber, setPhoneNumber] = useState("Рандомные значения, ибо не работает");
+    const[userName, setUserName] = useState("");
+    const[email, setEmail] = useState("");
+    const[phoneNumber, setPhoneNumber] = useState("");
     const[shopOwner, setShopOwner] = useState(false);
     const [allowEdit, setAllowEdit] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -23,8 +23,8 @@ const Profile = () => {
                     'Access-Control-Allow-Origin': '*', 
                     'Content-Type': 'application/json',
                     'Authorization':   `Bearer ${token}`}});
-            const userData = response?.data;
-            setUser({userData})
+            const userData = response?.data?.user;
+            setUser(userData)
             console.log({userData})
         } catch (err) {
             if(!err?.response) {
@@ -40,10 +40,10 @@ const Profile = () => {
         setAllowEdit(true);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         setAllowEdit(false);
         try {
-            await axios.patch(PROFILE_URL, {user},  
+            await axios.patch(PROFILE_URL, user,  
                 {headers: {
                     'Access-Control-Allow-Origin': '*', 
                     'Content-Type': 'application/json',
@@ -58,18 +58,43 @@ const Profile = () => {
         }
     }
 
-    useEffect((e) => {
-        setUser({
-            userName: userName,
-            email: email,
-            phoneNumber: phoneNumber,
-            shopOwner: shopOwner
-        })
-    }, [userName, email, phoneNumber, shopOwner]);
-
     useEffect(() => {
         getUser()
     }, []);
+
+    useEffect(() => {
+        setUser(user => ({
+          ...user,
+          phoneNumber: phoneNumber,
+          shopOwner: shopOwner,
+          userName: userName,
+          email: email
+        }));
+      }, [shopOwner, email, userName, phoneNumber]);
+
+    // useEffect(() => {
+    //     setUser({
+    //         email: email
+    //    })
+    //    }, [email]);
+
+    // useEffect(() => {
+    //     setUser({
+    //         userName: userName
+    //    })
+    //    }, [userName]);   
+
+    // useEffect(() => {
+    //     setUser({
+    //         phoneNumber: phoneNumber
+    //    })
+    //    }, [phoneNumber]);
+
+    // useEffect(() => {
+    //     setUser({
+    //         shopOwner: shopOwner
+    //    })
+    //    }, [shopOwner]);
 
     return(
         <>
@@ -101,7 +126,7 @@ const Profile = () => {
                         type="text" 
                         id="phoneNumber" 
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        value={phoneNumber}
+                        value={user.phoneNumber}
                         disabled= {!allowEdit}
                     />
                 </div>
@@ -110,14 +135,14 @@ const Profile = () => {
                     <input 
                         type="checkbox"
                         id="owner"
-                        checked={shopOwner}
+                        checked={user.shopOwner}
                         onChange={() => setShopOwner(!shopOwner)}
                         disabled= {!allowEdit}
                     />
                 </div>
                 <div className="profile_form_field">
                     <button className="profile_button" onClick={handleEdit}> Изменить профиль </button>
-                    <button className="profile_button" type="submit" onSubmit={handleSubmit}> Сохранить изменения профиля </button>
+                    <button className="profile_button" type="submit" onClick={handleSubmit}> Сохранить изменения профиля </button>
                 </div>
             </form>
         </>
