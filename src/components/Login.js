@@ -7,7 +7,6 @@ import { Link } from "react-router-dom"
 const LOGIN_URL = '/login';
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
@@ -32,9 +31,8 @@ const Login = () => {
 
             console.log(JSON.stringify(response?.data));
             const token = response?.data?.token;
-            localStorage.setItem("token", token);
+            //localStorage.setItem("token", token);
 
-           // setAuth({ user, pwd, accessToken });
             setEmail('');
             setPwd('');
             setSuccess(true);

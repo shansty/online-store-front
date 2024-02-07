@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 function App() {
   const [burgerMenuActive, setBurgerMenuActive] = useState(false);
-  const items = [{value: "Главная страница", href: "/"},{value: "Профиль", href: "/profile"}, {value: "О нас", href: "/about"}]
+  const items = [{value: "Главная страница", href: "/", id: 1},{value: "Профиль", href: "/profile", id: 2}, {value: "О нас", href: "/about", id: 3}]
 
   return (
     <main className="App">

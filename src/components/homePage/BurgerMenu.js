@@ -8,7 +8,6 @@ const BurgerMenu = ({items, active, setActive}) => {
                     <ul className="burger_links">
                         {items.map(item =>
                             <li key={item.id}>
-                                  {/* <a href={item.href}>{item.value}</a> */}
                                   <Link to={item.href}>{item.value}</Link>
                             </li>
                         )}

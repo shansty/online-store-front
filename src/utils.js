@@ -1,7 +1,8 @@
 function getIDFromToken() {
+
     const token = localStorage.getItem("token");
     if(!token) {
-        window.location.replace('/login');
+        return null
     } else {
         let tokenParts = token.split('.');
         let payload = JSON.parse(atob(tokenParts[1]));
@@ -10,4 +11,3 @@ function getIDFromToken() {
 }
 
 export default getIDFromToken;
-
