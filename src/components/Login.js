@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
 import axios from "../api/axios";
 import { Link } from "react-router-dom"
 
@@ -31,7 +30,7 @@ const Login = () => {
 
             console.log(JSON.stringify(response?.data));
             const token = response?.data?.token;
-            //localStorage.setItem("token", token);
+            localStorage.setItem("token", token);
 
             setEmail('');
             setPwd('');
