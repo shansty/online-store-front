@@ -68,7 +68,7 @@ const Profile = () => {
           userName: user.userName,
           email: user.email
         }));
-      }, [user.shopOwner, user.email, user.userName, user.phoneNumber]);
+      }, [user]);
 
 
       if (id === null) {
