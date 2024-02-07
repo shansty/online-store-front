@@ -9,12 +9,12 @@
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 22px;
-    color: #fff;
+    color: #000000;
 }
 
 body {
     min-height: 100vh;
-    background-color: #65b5be;
+    background-color: #fff;
 }
 
 .App {
@@ -23,7 +23,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
-  padding: 1rem 0.5rem;
+  padding: 3rem 0.5rem;
 }
 
 section {
@@ -34,7 +34,7 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     padding: 1rem;
-    background-color: #0e7985;
+    background-color: #7ab5bb;
 }
 
 form {
@@ -46,7 +46,7 @@ form {
 }
 
 a, a:visited {
-    color: #fff;
+    color: rgb(0, 0, 0);
 }
 
 input[type="text"],
@@ -66,7 +66,7 @@ button {
   margin-top: 1rem;
 }
 
-button {
+button.auth_button {
   padding: 0.5rem;
   background-color: #0a3e46a8;
   border-color: #00191c;
@@ -74,7 +74,7 @@ button {
   color: #000e11;
 }
 
-button:hover {
+button.auth_button:hover {
     padding: 0.5rem;
     transform: scale(1.05);
   }
@@ -82,8 +82,8 @@ button:hover {
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
-    background: #133034a8;;
-    color: #fff;
+    background: #4c7d84a8;;
+    color: rgb(0, 0, 0);
     padding: 0.25rem;
     position: relative;
     bottom: -10px;
@@ -122,4 +122,131 @@ button:hover {
 
 .line {
     display: inline-block;
+}
+
+nav.burger_navigation {
+    height: 50px;
+    width: 100%;
+    background-color: #7ab5bb;
+    position: fixed;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    top: 0;
+}
+
+.burger-btn {
+    width: 30px;
+    height: 20px;
+    margin-right: 20px; 
+    position: absolute;
+    cursor: pointer;
+    top: 15px; 
+    right: 20px; 
+}
+
+.burger-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    background-color: rgb(0, 0, 0);
+    height: 2px;
+}
+
+.burger-btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    background-color: rgb(0, 0, 0);
+    height: 2px;
+}
+
+.burger-btn span {
+    position: absolute;
+    top: 9px;
+    right: 0;
+    width: 30px;
+    background-color: rgb(0, 0, 0);
+    height: 2px;
+}
+
+.burger-menu {
+    position: fixed;
+    width: 20vw;
+    height: 100vh;
+    top: 50px;
+    right: 0;
+    transform: translateX(100%);
+    transition: all 0.2s;
+}
+
+.burger-menu.active {
+    transform: translateX(0);
+}
+
+.menu_content {
+    height: 100%;
+    background-color: #7ab5bb;
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s;
+}
+
+ul.burger_links li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+ul.burger_links {
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ul.burger_links li {
+    align-items: center;
+    display: flex;
+    margin: 5px;
+    list-style: none;
+}
+
+form.profile_form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: baseline;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+.profile_form_field {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.profile_form_field > label {
+   margin-right: 20px;
+}
+
+button.profile_button {
+    margin-right: 20px;
+    background-color: #0a3e46a8;
+    border-color: #00191c;
+    font-weight: bold;
+    color: #000e11;
+}
+
+button.profile_button:hover {
+    transform: scale(1.02);
 }

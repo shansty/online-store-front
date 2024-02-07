@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
 import axios from "../api/axios";
 import { Link } from "react-router-dom"
 
@@ -7,11 +6,10 @@ import { Link } from "react-router-dom"
 const LOGIN_URL = '/login';
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
     const [errMsg, setErrMsq] = useState("");
     const [success, setSuccess] = useState(false);
@@ -22,18 +20,19 @@ const Login = () => {
 
     useEffect(() => {
         setErrMsq("");
-    }, [user, pwd])
+    }, [email, pwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(LOGIN_URL, {email:user, password:pwd},  
+            const response = await axios.post(LOGIN_URL, {email, password:pwd},  
                 {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}});
 
             console.log(JSON.stringify(response?.data));
-           // const accessToken = response?.data?.accessToken;
-           // setAuth({ user, pwd, accessToken });
-            setUser('');
+            const token = response?.data?.token;
+            localStorage.setItem("token", token);
+
+            setEmail('');
             setPwd('');
             setSuccess(true);
         } catch (err) {
@@ -66,14 +65,14 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offcreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username"> Username:</label>
+                        <label htmlFor="email"> Email:</label>
                         <input 
                             type="text" 
-                            id="username" 
+                            id="email" 
                             ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            autoComplete="on"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             requred
                         />
 
@@ -85,7 +84,7 @@ const Login = () => {
                             value={pwd}
                             requred
                         />
-                        <button>Sign In</button>
+                        <button className="auth_button">Sign In</button>
                     </form>
                     <p>
                         Need an Account? <br />
