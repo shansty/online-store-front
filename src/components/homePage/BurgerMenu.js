@@ -2,13 +2,15 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"; 
 
 const BurgerMenu = ({items, active, setActive}) => {
+    
 
     const [shopOwner, setShopOwner] = useState(false);
 
     useEffect(() => {
-        const shopOwnerValue = localStorage.getItem("shopOwner");
-        const isShopOwner = Boolean(shopOwnerValue);
+        const isShopOwner = localStorage.getItem("shopOwner");
         setShopOwner(isShopOwner);
+        console.log(isShopOwner)
+        console.log(shopOwner)
       }, []);
 
     return(
@@ -21,11 +23,11 @@ const BurgerMenu = ({items, active, setActive}) => {
                                   <Link to={item.href}>{item.value}</Link>
                             </li>   
                         )}
-                        {shopOwner && (
+                        {shopOwner && 
                             <li className="burger_links">
-                                <Link to="/product">Магазин</Link>
+                                <Link to="/products">Магазин </Link>
                             </li>
-                        )}
+                        }
                     </ul>
                 </div>
             </div>

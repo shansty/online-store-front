@@ -3,6 +3,7 @@ import Register from './Register';
 import HomePage from './homePage/HomePage';
 import Profile from './profile/Profile';
 import BurgerMenu from './homePage/BurgerMenu';
+import Products from './shopsProducts/Products';
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
 import { useState } from 'react';
 
@@ -18,6 +19,7 @@ function App() {
               <Route path="/login" element={<Login />} /> 
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/products" element={<Products />} />
         </Routes>
             <nav className="burger_navigation">
                 <div className="burger-btn" onClick={() => setBurgerMenuActive(!burgerMenuActive)}>
