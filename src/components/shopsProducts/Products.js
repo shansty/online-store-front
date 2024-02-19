@@ -3,6 +3,7 @@ import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import Product from "./Product";
 import getIDFromToken from "../../utils";
+import { Link } from "react-router-dom"
 
 const Products = () => {
     let id = getIDFromToken();
@@ -13,7 +14,11 @@ const Products = () => {
     const[products, setProducts] = useState([]);
     const [errMsg, setErrMsq] = useState("");
 
-    const getProducts = async (e) => {
+    const handleAddProductButtonClick = () => {
+        navigate("/add_product");
+    };
+
+    const getProducts = async () => {
         try {
             const response = await axios.get(PRODUCTS_URL,   
                 {headers: {
@@ -22,6 +27,7 @@ const Products = () => {
                     'Authorization':   `Bearer ${token}`}});
             const productsData = response?.data;
             setProducts(productsData || []);
+            console.log({productsData})
         } catch (err) {
             if(!err?.response) {
                 setErrMsq('No Server Response')
@@ -35,17 +41,6 @@ const Products = () => {
         getProducts()
     }, []);
 
-    // useEffect(() => {
-    //     setProducts(products => ({
-    //       ...products,
-    //       title: products.title,
-    //       description: products.description,
-    //       img: products.img,
-    //       isInStock: products.isInStock,
-    //       vendorCode: products.vendorCode
-    //     }));
-    //   }, [products]);
-
 
       if (id === null) {
         return (
@@ -58,8 +53,17 @@ const Products = () => {
                 <div>
                     <h2>Список товаров</h2>
                     {products.map(product => (
-                    <Product key={product.id} product={product} />
+                    <div>
+                        <Product key={product.id} product={product}/>
+{/* ПРИ ПЕРЕХОДЕ ПО ССЫЛКЕ ОШИБКА Uncaught runtime errors:
+×
+ERROR
+Cannot read properties of undefined (reading 'id')
+TypeError: Cannot read properties of undefined (reading 'id') */}
+                        <Link to={`/product/${product.id}`}>Подробная информация</Link>
+                    </div>
                     ))}
+                    <button className="profile_button" onClick={handleAddProductButtonClick}>Добавить товар</button>
                 </div>
             )
         }

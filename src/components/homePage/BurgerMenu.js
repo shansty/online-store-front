@@ -4,14 +4,7 @@ import { useEffect, useState } from "react";
 const BurgerMenu = ({items, active, setActive}) => {
     
 
-    const [shopOwner, setShopOwner] = useState(false);
-
-    useEffect(() => {
-        const isShopOwner = localStorage.getItem("shopOwner");
-        setShopOwner(isShopOwner);
-        console.log(isShopOwner)
-        console.log(shopOwner)
-      }, []);
+    const [shopOwner, setShopOwner] = useState(localStorage.getItem("shopOwner")==="true");
 
     return(
         <>
