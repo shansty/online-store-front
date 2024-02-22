@@ -12,7 +12,6 @@ const Products = () => {
 
     const navigate = useNavigate();
     const[products, setProducts] = useState([]);
-    const [errMsg, setErrMsq] = useState("");
 
     const handleAddProductButtonClick = () => {
         navigate("/add_product");
@@ -25,17 +24,11 @@ const Products = () => {
                     'Access-Control-Allow-Origin': '*', 
                     'Content-Type': 'application/json',
                     'Authorization':   `Bearer ${token}`}});
-            const productsData = response?.data;
+            const productsData = response?.data.userProducts;
             setProducts(productsData || []);
-            console.log({productsData})
         } catch (err) {
-            if(!err?.response) {
-                setErrMsq('No Server Response')
-            } else {
-                setErrMsq('Error')
-            }
-        }
-    }
+            console.log(err)
+    }}
 
     useEffect(() => {
         getProducts()
@@ -55,11 +48,6 @@ const Products = () => {
                     {products.map(product => (
                     <div>
                         <Product key={product.id} product={product}/>
-{/* ПРИ ПЕРЕХОДЕ ПО ССЫЛКЕ ОШИБКА Uncaught runtime errors:
-×
-ERROR
-Cannot read properties of undefined (reading 'id')
-TypeError: Cannot read properties of undefined (reading 'id') */}
                         <Link to={`/product/${product.id}`}>Подробная информация</Link>
                     </div>
                     ))}

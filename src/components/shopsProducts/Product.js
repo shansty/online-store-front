@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import axios from "../../api/axios";
 import getIDFromToken from "../../utils";
 
 const Product = ({product}) => {
+  
     let id = getIDFromToken();
     const PRODUCT_URL = `/users/${id}/products/${product.id}`;
     const token = localStorage.getItem("token");

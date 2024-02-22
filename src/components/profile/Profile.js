@@ -11,7 +11,6 @@ const Profile = () => {
     const navigate = useNavigate();
     const[user, setUser] = useState({});
     const [allowEdit, setAllowEdit] = useState(false);
-    const [errMsg, setErrMsq] = useState("");
 
     const getUser = async (e) => {
         try {
@@ -24,11 +23,7 @@ const Profile = () => {
             setUser(userData)
             console.log({userData})
         } catch (err) {
-            if(!err?.response) {
-                setErrMsq('No Server Response')
-            } else {
-                setErrMsq('Error')
-            }
+            console.log(err)
         }
     }
 
@@ -46,11 +41,7 @@ const Profile = () => {
                     'Content-Type': 'application/json',
                     'Authorization':   `Bearer ${token}`}});
         } catch (err) {
-            if(!err?.response) {
-                setErrMsq('No Server Response')
-            } else {
-                setErrMsq('Error')
-            }
+            console.log(err)
         }
         localStorage.setItem("shopOwner", user.shopOwner);
     }

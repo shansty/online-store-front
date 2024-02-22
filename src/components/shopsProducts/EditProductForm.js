@@ -1,33 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "../../api/axios";
 import getIDFromToken from "../../utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddProductForm = () => {
+const EditProductForm = () => {
 
-    let userId = getIDFromToken();
+    const userId = getIDFromToken();
     const token = localStorage.getItem("token");
+    let { id } = useParams();
+    const EDIT_PRODUCT_URL = `/users/${userId}/products/${id}`
 
-    const ADD_PRODUCT_URL = `/users/${userId}/products`
     const navigate = useNavigate();
     const[product, setProduct] = useState({});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(ADD_PRODUCT_URL, product,  
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*', 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-            navigate("/products");  
-        } catch (err) {
-            console.log(err.response)
-        }
+            await axios.patch(EDIT_PRODUCT_URL, product,  
+                {headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json',
+                    'Authorization':   `Bearer ${token}`}});
+          } catch (err) {
+              console.log(err)
+          }
+          navigate("/products")
     }
+
+    useEffect(() => {
+        setProduct(product => ({
+          ...product,
+          title: product.title,
+          description: product.description,
+          vendorCode: product.vendorCode,
+          img: product.img
+        }));
+      }, [product]);
 
             return(
                 <>
@@ -72,11 +80,11 @@ const AddProductForm = () => {
                             />
                         </div>
                         <div className="profile_form_field">
-                            <button className="profile_button"> Сохранить товар </button>
+                            <button className="profile_button"> Сохранить изменения </button>
                         </div>
                     </form>
                 </>
             )
     }
 
-export default AddProductForm;
+export default EditProductForm;
